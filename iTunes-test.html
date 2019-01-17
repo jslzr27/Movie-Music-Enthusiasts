@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>iTunes Test</title>
+</head>
+
+<body>
+
+    <button id='play'>Play</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+      function displayMusicInfo() {
+
+        var queryURL = "Https://itunes.apple.com/search?term=soundtrack+hans+zimmer&limit=200";
+
+        $.ajax({
+          url: queryURL,
+          method: "GET",
+          dataType: 'JSON'
+        }).then(function(response) {
+          var itunesOBJ = response;
+          console.log(itunesOBJ);
+        });
+
+      }
+
+      var song = document.createElement("audio");
+      file = "https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music/1e/1e/3d/mzm.dnsmqnrh.aac.p.m4a"; 
+
+      $("#play").on("click", function() {
+        song.setAttribute("src", file);
+        song.play();
+      })
+
+      displayMusicInfo();
+    </script>
+  </div>
+</body>
+
+</html>
