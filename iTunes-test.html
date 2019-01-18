@@ -2,43 +2,85 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>iTunes Test</title>
+    <meta charset="utf-8">
+    <title>iTunes Test</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="padding: 10px;">
+
+    <div style="width: 300px">
+        <form id="searchForm">
+
+            <div class="form-group">
+                <label for="searchBy">Search By:</label><br>
+                <select class="form-control" id="searchBy">
+                    <option selected>Movie</option>
+                    <option>Music Artist</option>
+                    <option>Music Genre</option>
+                  </select>
+            </div>
+
+            <label for="searchTerm">Search Term:</label><br>
+            <input class="inputs rounded form-control" id="searchTerm" type="text"><br>
+
+            <button type="button" id="searchButton" class="btn btn-primary">Search</button>
+
+        </form>
+    </div>
+
+    <br>
+
+    <div id="displayResults">
+
+    </div>
+
 
     <button id='play'>Play</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+        var term;
+        var genre;
+        var queryURL;
 
-      function displayMusicInfo() {
+        function searchiTunes() {
+            console.log(queryURL);
+            $.ajax({
+                url: queryURL,
+                method: "GET",
+                dataType: 'JSON'
+            }).then(function(response) {
+                console.log(response);
+            });
+        };
 
-        var queryURL = "Https://itunes.apple.com/search?term=soundtrack+hans+zimmer&limit=200";
+        var song = document.createElement("audio");
+        file = "https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music/v4/dc/8b/a8/dc8ba869-69c7-7d29-f108-b7540c938139/mzaf_811735733402692469.plus.aac.p.m4a";
 
-        $.ajax({
-          url: queryURL,
-          method: "GET",
-          dataType: 'JSON'
-        }).then(function(response) {
-          var itunesOBJ = response;
-          console.log(itunesOBJ);
+        $("#searchButton").on("click", function(event) {
+            event.preventDefault();
+            term = $("#searchTerm").val().trim();
+            term = term.replace(/\W+/g, '+').toLowerCase();
+            console.log(term);
+
+            if ($("#searchBy").val() === "Movie") {
+                queryURL = "https://itunes.apple.com/search?term=original+motion+picture+soundtrack+" + term + "&limit=200";
+            };
+            searchiTunes();
         });
 
-      }
+        $("#play").on("click", function() {
+            song.setAttribute("src", file);
+            song.play();
+        })
 
-      var song = document.createElement("audio");
-      file = "https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music/1e/1e/3d/mzm.dnsmqnrh.aac.p.m4a"; 
-
-      $("#play").on("click", function() {
-        song.setAttribute("src", file);
-        song.play();
-      })
-
-      displayMusicInfo();
+        // displayMusicInfo();
     </script>
-  </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>
