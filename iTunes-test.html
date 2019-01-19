@@ -1,12 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <title>iTunes Test</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
 <body style="padding: 10px;">
@@ -20,6 +18,17 @@
                     <option selected>Movie</option>
                     <option>Music Artist</option>
                     <option>Music Genre</option>
+                    <option>Music Song Title</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="searchGenre">Search By:</label><br>
+                <select class="form-control" id="searchGenre">
+                    <option >Pop</option>
+                    <option>Rock</option>
+                    <option>Classical</option>
+                    <option>R&B</option>
                 </select>
             </div>
 
@@ -57,7 +66,7 @@
                 url: queryURL,
                 method: "GET",
                 dataType: 'JSON'
-            }).then(function (response) {
+            }).then(function(response) {
                 console.log(response);
             });
         };
@@ -67,12 +76,14 @@
             var pDiv = $("<p>");
             pDiv.html("Please Select the Movie You Intended to Search for:<br>");
             $("#displayArea").append(pDiv);
-                console.log(response.results.length);
+            console.log(response.results.length);
             for (var i = 0; i < response.results.length; i++) {
                 console.log(i);
                 var movieDiv = $("<div class='movie' style='border: 1px solid black; width: 300px; display: inline-block; margin: 5px; cursor: pointer;'>");
                 var imgURL = response.results[i].poster_path;
-                if (imgURL) {imgURL = "https://image.tmdb.org/t/p/original/" + imgURL};
+                if (imgURL) {
+                    imgURL = "https://image.tmdb.org/t/p/original/" + imgURL
+                };
                 console.log(imgURL);
                 var image = $("<img class='img-fluid' alt='Image Unavailable'>").attr("src", imgURL);
                 movieDiv.attr("data-title", response.results[i].title);
@@ -82,14 +93,14 @@
         };
 
         function displaySoundtrack() {
-            term = $(this).attr("data-title").replace(/\W+/g, '+').toLowerCase();            
+            term = $(this).attr("data-title").replace(/\W+/g, '+').toLowerCase();
             queryURL = "https://itunes.apple.com/search?term=" + term + "&limit=200&media=music&entity=album";
             console.log(queryURL);
             $.ajax({
                 url: queryURL,
                 method: "GET",
                 dataType: 'JSON'
-            }).then(function (response) {
+            }).then(function(response) {
                 console.log(response);
             });
         };
@@ -101,7 +112,7 @@
                 url: queryURL,
                 method: "GET",
                 dataType: 'JSON'
-            }).then(function (response) {
+            }).then(function(response) {
                 console.log(response);
                 totalPages = response.total_pages;
                 var totalResults = response.total_results;
@@ -112,9 +123,9 @@
                     displayMovies(response);
                 };
             });
-        }; 
+        };
 
-        $("#searchButton").on("click", function (event) {
+        $("#searchButton").on("click", function(event) {
             event.preventDefault();
             term = $("#searchTerm").val().trim();
             term = term.replace(/\W+/g, '+').toLowerCase();
@@ -141,10 +152,8 @@
     </script>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>
