@@ -18,33 +18,49 @@
                     <option selected>Movie</option>
                     <option>Music Artist</option>
                     <option>Music Genre</option>
-                  </select>
+                    <option>Music Song Title</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="searchGenre">Search By:</label><br>
+                <select class="form-control" id="searchGenre">
+                    <option >Pop</option>
+                    <option>Rock</option>
+                    <option>Classical</option>
+                    <option>R&B</option>
+                </select>
             </div>
 
             <label for="searchTerm">Search Term:</label><br>
             <input class="inputs rounded form-control" id="searchTerm" type="text"><br>
 
-            <button type="button" id="searchButton" class="btn btn-primary">Search</button>
+            <button type="submit" id="searchButton" class="btn btn-primary">Search</button>
 
         </form>
     </div>
 
     <br>
 
-    <div id="displayResults">
+    <div id="displayArea">
 
     </div>
 
 
-    <button id='play'>Play</button>
+    <!-- <button id='play'>Play</button> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
         var term;
         var genre;
         var queryURL;
+        var page = 1;
+        var totalPages;
+        var song = document.createElement("audio");
+        var file = "https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music/v4/dc/8b/a8/dc8ba869-69c7-7d29-f108-b7540c938139/mzaf_811735733402692469.plus.aac.p.m4a";
 
         function searchiTunes() {
+            queryURL = "https://itunes.apple.com/search?term=original+motion+picture+soundtrack+" + term + "&limit=200";
             console.log(queryURL);
             $.ajax({
                 url: queryURL,
@@ -55,25 +71,82 @@
             });
         };
 
-        var song = document.createElement("audio");
-        file = "https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music/v4/dc/8b/a8/dc8ba869-69c7-7d29-f108-b7540c938139/mzaf_811735733402692469.plus.aac.p.m4a";
+        function displayMovies(response) {
+
+            var pDiv = $("<p>");
+            pDiv.html("Please Select the Movie You Intended to Search for:<br>");
+            $("#displayArea").append(pDiv);
+            console.log(response.results.length);
+            for (var i = 0; i < response.results.length; i++) {
+                console.log(i);
+                var movieDiv = $("<div class='movie' style='border: 1px solid black; width: 300px; display: inline-block; margin: 5px; cursor: pointer;'>");
+                var imgURL = response.results[i].poster_path;
+                if (imgURL) {
+                    imgURL = "https://image.tmdb.org/t/p/original/" + imgURL
+                };
+                console.log(imgURL);
+                var image = $("<img class='img-fluid' alt='Image Unavailable'>").attr("src", imgURL);
+                movieDiv.attr("data-title", response.results[i].title);
+                movieDiv.append(image);
+                $("#displayArea").append(movieDiv);
+            };
+        };
+
+        function displaySoundtrack() {
+            term = $(this).attr("data-title").replace(/\W+/g, '+').toLowerCase();
+            queryURL = "https://itunes.apple.com/search?term=" + term + "&limit=200&media=music&entity=album";
+            console.log(queryURL);
+            $.ajax({
+                url: queryURL,
+                method: "GET",
+                dataType: 'JSON'
+            }).then(function(response) {
+                console.log(response);
+            });
+        };
+
+        function searchTMDB() {
+            var queryURL = "https://api.themoviedb.org/3/search/movie?api_key=cb56eb197668ef66bec1c2c9f31d14e0&query=" + term + "&adult=false&page=" + page;
+
+            $.ajax({
+                url: queryURL,
+                method: "GET",
+                dataType: 'JSON'
+            }).then(function(response) {
+                console.log(response);
+                totalPages = response.total_pages;
+                var totalResults = response.total_results;
+                if (totalResults === 0) {
+                    var divP = $("<p>").text("No Results Found");
+                    $("#displayArea").append(divP);
+                } else {
+                    displayMovies(response);
+                };
+            });
+        };
 
         $("#searchButton").on("click", function(event) {
             event.preventDefault();
             term = $("#searchTerm").val().trim();
             term = term.replace(/\W+/g, '+').toLowerCase();
             console.log(term);
+            $("#displayArea").empty();
 
-            if ($("#searchBy").val() === "Movie") {
-                queryURL = "https://itunes.apple.com/search?term=original+motion+picture+soundtrack+" + term + "&limit=200";
+            switch ($("#searchBy").val()) {
+                case "Movie":
+                    page = 1; // start on page one of possible movie search results
+                    searchTMDB();
+                    break;
             };
-            searchiTunes();
+
         });
 
-        $("#play").on("click", function() {
-            song.setAttribute("src", file);
-            song.play();
-        })
+        $(document).on("click", ".movie", displaySoundtrack);
+
+        // $("#play").on("click", function () {
+        //     song.setAttribute("src", file);
+        //     song.play();
+        // })
 
         // displayMusicInfo();
     </script>
