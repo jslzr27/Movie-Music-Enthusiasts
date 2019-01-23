@@ -39,6 +39,38 @@ function displayMovies(response) {
     });
 };
 
+
+function displayArtists(response) {
+
+    for (var i = 0; i < response.results.length; i++) {
+
+        var imgURL = response.results[i].artworkUrl100;
+        if (imgURL) {
+            var image = $("<img class='img-fluid' alt='Image Unavailable'>").attr("src", imgURL);
+            var artistDiv = $("<div class='movie'>");
+            artistDiv.attr("data-artistName", response.results[i].artistName, response.results[i].artistId);
+            artistDiv.append(image);
+            artistDiv.hide();
+            $("#movie-search-movies").append(artistDiv);
+        };
+    };
+
+    var artistCount = $("#movie-search-movies").children().length;
+    if (artistCount > 0) {
+        $(".movie-count").text(" - " + artistCount + " movie(s) found");
+        $("#movie-search-wrapper").show();
+    } else {
+        $(".movie-count").text(" - 0 movies found");
+        $('#modal-title').text("Movie Search");
+        $('#modal-message').text("No movies found based on your search.");
+        $('#modal-box').modal('show');
+    };
+
+    $(".movie").fadeIn("slow", function() {
+        //animation complete
+    });
+};
+
 function getMovieSoundtrack() {
     $(".movie").attr("style", "border: 1px solid black;");
     $(this).attr("style", "border: 4px solid yellow;");
@@ -183,8 +215,8 @@ $("#search-button").on("click", function(event) {
             page = 1; // start on page one of possible movie search results
             searchTMDB();
             break;
-    };
-});
+
+    } 
 
 // Search by Movie - begin the process of finding the soundtrack for the selected movie
 $(document).on("click", ".movie", getMovieSoundtrack);
