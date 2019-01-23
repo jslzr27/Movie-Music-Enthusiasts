@@ -1,18 +1,23 @@
 body {
     background-color: lightgray;
     padding: 5px;
+    font-family: 'Cabin', sans-serif;
 }
 
-.movie-count, .soundtrack-count {
-    color: #4641af;
+.movie-count,
+.soundtrack-count {
+    color: #0e21af;
 }
 
 .movie {
     border: 1px solid black;
     width: 200px;
+    height: 298px;
     display: inline-block;
     margin: 5px;
-    cursor: pointer
+    cursor: pointer;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .movie-soundtrack {
@@ -23,29 +28,46 @@ body {
     cursor: pointer
 }
 
-.jumbotron {
+#header {
     text-align: center;
     font-size: 50px;
     font-weight: bold;
-    background-color: #4641af;
+    background-color: black;
     border: 4px solid white;
     color: white;
+    white-space: nowrap;
+}
+
+#header-logo {
+    width: 10%;
+    margin: 10px;
+}
+
+#header-logo-title {
+    width: 80%;
+    margin-top: 3%;
 }
 
 #search-area {
     padding: 10px;
 }
 
+#search-button {
+    background-color: #0e21af;
+    color: white;
+}
+
 #movie-search-wrapper {
+    margin-top: 10px;
     display: none;
 }
 
 #movie-search-movies {
     background-color: darkgray;
-    border: 1px solid black;
+    border: 3px solid black;
     padding: 5px;
-    margin-bottom: 5px;
-    height: 340px;
+    margin-bottom: 10px;
+    height: 330px;
     overflow: auto;
     overflow-y: hidden;
     white-space: nowrap;
@@ -53,7 +75,7 @@ body {
 
 #movie-search-soundtracks {
     background-color: darkgray;
-    border: 1px solid black;
+    border: 3px solid black;
     padding: 5px;
     margin-bottom: 10px;
     height: 230px;
@@ -62,7 +84,29 @@ body {
     white-space: nowrap;
 }
 
-#movie-search-tracks, #movie-search-suggested {
-    height: 300px;
-    border: 1px solid black;
+#movie-search-tracks {
+    background-color: white;
+    border: 3px solid black;
+}
+
+#soundtrack-header {
+    background-color: #0e21af;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+#movie-search-tracks {
+    height: 400px;
+    overflow: auto;
+}
+
+th,
+td {
+    font-size: 14px;
+}
+
+.play-button {
+    cursor: pointer;
+    width: 20px;
 }
