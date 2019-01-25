@@ -1,7 +1,8 @@
 function displayArtist(response) {
 
     for (var i = 0; i < response.results.length; i++) {
-
+        var artistName = response.results[i].artistName;
+        var colId = response.results[i].collectionId;
         var imgURL = response.results[i].artworkUrl100;
         if (imgURL) {
             imgURL = imgURL
@@ -9,16 +10,16 @@ function displayArtist(response) {
             var artistDiv = $("<div class='movie'>");
             $(".movie").attr("style", "border: 1px solid black;");
             $(artistDiv).attr("style", "border: 4px solid yellow;");
-            artistDiv.attr("data-artistName", response.results[i].artistName);
+            artistDiv.attr("data-artistName", "data-collectionId");
             artistDiv.append(image);
             artistDiv.hide();
-            $("#movie-search-movies").append(movieDiv);
+            $("#movie-search-movies").append(artistDiv);
         };
     };
 
 function getArtists(){
     term = $(this).attr("data-artistName");
-    queryURL = queryURL = "https://itunes.apple.com/search?artistTerm=" + term + "&descriptionTerm=Soundtrack";
+    queryURL = queryURL = "https://itunes.apple.com/search?artistTerm=" + term + "&genreId=16";
     $(".movie").attr("style", "border: 1px solid black;");
     $(this).attr("style", "border: 4px solid yellow;");
     displayArtist();
@@ -68,7 +69,6 @@ switch ($("#search-by").val()) {
         searchTMDB();
         break;
      case "Music Artist":
-        resetMovieSearch();
         page = 1
         getArtists();
         break;

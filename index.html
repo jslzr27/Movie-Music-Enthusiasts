@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
     <!-- Local CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 
 <body style="padding: 10px;">
@@ -28,8 +29,8 @@
                     <div class="form-group">
                         <label for="searchBy">Search By:</label><br>
                         <select class="form-control" id="search-by">
-                            <option selected>Movie</option>
-                            <option id=musicArtist>Music Artist</option>
+                            <option >Movie</option>
+                            <option selected>Music Artist</option>
                             <option>Music Genre</option>
                             <option>Music Song Title</option>
                         </select>
@@ -79,8 +80,12 @@
                 </form>
             </div>
             <div class="col-sm-10">
+                <div id="music-search-wrapper">
+                        <h3 id=music-search-header>Artist Search Results<span class="music-count"></span></h3>
+                        <div class="rounded" id="music-search-albums"></div> 
+                </div>
                 <div id="movie-search-wrapper">
-                    <h3>Movie Search Results<span class="movie-count"></span></h3>
+                    <h3 id=movie-search-header>Movie Search Results<span class="movie-count"></span></h3>
                     <div class="rounded" id="movie-search-movies"></div>
                     <h3>Related Soundtrack(s)<span class="soundtrack-count"></span></h3>
                     <div class="rounded" id="movie-search-soundtracks"></div>
@@ -134,7 +139,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="assets/javascript/logic.js"></script>
+    <script src="jovanjs.js"></script>
 </body>
 
 </html>
