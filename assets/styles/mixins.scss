@@ -5,3 +5,48 @@
     position: absolute;
     overflow: hidden;
 }
+
+@mixin musicResults{
+    background-color: $black;
+    border: 3px solid $blue;
+    padding: 5px;
+    margin-bottom: 10px;
+    height: 230px;
+    overflow: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-bottom: 30px;
+}
+
+@mixin scrollbar {
+
+    ::-webkit-scrollbar{
+        background: $grey;
+        width: 14px;
+    }
+
+    ::-webkit-scrollbar-track{
+        border-radius: 12px;
+        box-shadow: inset 0 0 10px $grey;
+    }
+
+    ::-webkit-scrollbar-thumb{
+        background: $black;
+        border-radius: 10px;
+    }
+}
+
+@mixin tracks{
+    height: 500px;
+    overflow: auto;
+    background-color: white;
+    border: 3px solid $blue;
+    margin-bottom: 10px;
+}
+
+@mixin theader {
+    background-color: $blue;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}

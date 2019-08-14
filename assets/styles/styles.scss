@@ -7,7 +7,11 @@ body {
     background: $paper;
     width: 100%;
     overflow-x: hidden;
+
+    font-family: $bodyFont;
 }
+
+@include scrollbar;
 
 .main-header {
     @include menu;
@@ -19,6 +23,11 @@ body {
         position: absolute;
         top:10px;
         left: 10px;
+
+        a{
+            text-decoration: none;
+            color: #fff;
+        }
     }
 
     nav{
@@ -40,9 +49,8 @@ body {
     // display: flex;
     // align-items: center;
     // justify-content: center;
-    margin: 50px auto 50px;;
+    margin: 50px auto 0px;;
     width: 80%;
-    border: 1px solid red;
 
     #searchForm{
         margin: 0 auto;
@@ -54,7 +62,6 @@ body {
         
 
         #search-by-group{
-            border: 1px solid green;
             display: inline-block;
             width: 10%;
             margin: 10px;
@@ -74,7 +81,6 @@ body {
             display: inline-block;
             height: 40px;
             width: 60%;
-            border: 1px solid blue;
             border-radius: 25px;
             padding: 0;
             text-align: center;
@@ -116,7 +122,6 @@ body {
     max-width: 100%;
     padding: 50px 30px;
     background: #fafafa;  
-    border: 1px solid green;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: minmax(100px, auto);
@@ -149,18 +154,20 @@ body {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: minmax(150px, auto);    
-            grid-gap: 10px;
+            grid-gap: 30px;
             max-width: 100%;
             margin: 0 auto;
 
             .mp{
                 text-align: center;
-                box-shadow: 0px 0px 5px grey;
-                padding: 10px 20px;
+                box-shadow: 0px 0px 8px grey;
+                padding: 10px;
+                background: $blackTrans;
+                color: #fff;
 
                 img{
-                    width: 230px;
-                    height: 330px;
+                    width: 250px;
+                    height: 360px;
                 }
 
                 h5{
@@ -178,6 +185,27 @@ body {
 #search-wrapper {
     margin-top: 10px;
     display: none;
+    padding: 30px 50px;
+
+    .results-area{
+
+        h3{
+            padding: 20px 0px;
+        }
+    }
+
+    #artist-results-wrapper{
+        
+        #artist-results{
+            @include musicResults;
+
+        }
+    }
+
+    #soundtrack-results{
+        @include musicResults;
+    }
+
 
     .movie-count,
     .soundtrack-count,
@@ -196,7 +224,6 @@ body {
     
     .movie-soundtrack,
     .artist-album {
-        border: 1px solid black;
         width: 200px;
         display: inline-block;
         margin: 5px;
@@ -205,17 +232,16 @@ body {
 }
 
 #movie-results {
-    background-color: $sea;
+    background-color: $black;
     border: 3px solid $blue;
     padding: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     height: 330px;
     overflow: auto;
     overflow-y: hidden;
     white-space: nowrap;
 
     .movie {
-        border: 1px solid black;
         width: 200px;
         height: 298px;
         display: inline-block;
@@ -226,44 +252,53 @@ body {
     }
 }
 
-#soundtrack-results,
-#artist-results {
-    background-color: $sea;
-    border: 3px solid $blue;
-    padding: 5px;
-    margin-bottom: 10px;
-    height: 230px;
-    overflow: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-}
-
 #rec-tables{
-    #soundtrack-tracks,
-    #suggested-tracks {
-        height: 500px;
-        overflow: auto;
-        background-color: white;
-        border: 3px solid $blue;
-        margin-bottom: 10px;
+    margin: 50px 0px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    padding: 10px;
+
+    .left-soundtracks{
+        grid-column: 1/2;
+
+        #soundtrack-tracks{
+            @include tracks;
+
+            #soundtrack-header{
+                @include theader;
+            }
+        }
     }
 
-    #soundtrack-header,
-    #suggested-header {
-        background-color: $blue;
-        color: white;
-        text-align: center;
-        font-weight: bold;
+    .right-suggested{
+        grid-column: 2/3;
+
+        #suggested-tracks {
+            @include tracks;
+    
+            #suggested-header{
+                @include theader;
+            }
+        }
     }
 
-    th,
-    td {
-        font-size: 14px;
-    }
+    tr td {
 
-    .play-button {
-        cursor: pointer;
-        width: 20px;
+        .play-button {
+            cursor: pointer;
+            width: 20px;
+            
+            &:hover{
+                text-shadow: 0 0 2px $grey;
+            }
+        }
+    
+        a{
+            color: $blue;
+        }
+
     }
     
 }
@@ -271,8 +306,6 @@ body {
 
 footer{
     @include menu;
-    // left: 0;
-    // bottom: 0;
 
     .footer-area{
         display: grid;
@@ -352,8 +385,6 @@ footer{
     }
 }
 
-
-//Original styles
 
 
 

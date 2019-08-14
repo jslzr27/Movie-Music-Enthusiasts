@@ -140,7 +140,7 @@ function displayMovies(response) {
 
 function getMovieSoundtrack() {
     $(".movie").attr("style", "border: 1px solid black;");
-    $(this).attr("style", "border: 4px solid yellow;");
+    $(this).attr("style", "border: 2px solid #D4AF37;");
 
     //Determine if movie is already selected and stop if it is
     if (term === $(this).attr("data-title")) { return false };
@@ -227,7 +227,7 @@ function displayMovieSoundtrack(response) {
 
 function displaySoundtrackSongs() {
     $(".movie-soundtrack").attr("style", "border: 1px solid black;");
-    $(this).attr("style", "border: 4px solid yellow;");
+    $(this).attr("style", "border: 2px solid #D4AF37;");
 
     // Determine if soundtrack is already selected and stop if it is
     if ($("#soundtrack-header").attr("data-id") === $(this).attr("data-id")) { return false };
@@ -244,7 +244,8 @@ function displaySoundtrackSongs() {
             $("#youtube-logo").show();
             $("#soundtrack-header").attr("data-id", $(this).attr("data-id"));
             var newTR = $('<tr>');
-            newTR.append('<td><img class="play-button" src="assets/images/play.png" data-preview=' + soundtrackSongs[i].previewUrl + '></td>');
+            // newTR.append('<td><img class="play-button" src="assets/images/play.png" data-preview=' + soundtrackSongs[i].previewUrl + '></td>');
+            newTR.append('<td><i class="fas fa-play play-button" data-preview=' + soundtrackSongs[i].previewUrl + '></i></td>');
             newTR.append('<td>' + soundtrackSongs[i].discNumber + '</td>');
             newTR.append('<td>' + soundtrackSongs[i].trackNumber + '</td>');
             newTR.append('<td>' + soundtrackSongs[i].trackName + '</td>');
@@ -300,7 +301,8 @@ function displaySongSuggestions(response, details) {
             // Add the song to the list only if the explicitness matches (prevents explicit songs being suggested for non-explicit albums)
             if (songs[i].collectionExplicitness === details.explicit) {
                 var newTR = $('<tr>');
-                newTR.append('<td><img class="play-button" src="assets/images/play.png" data-preview=' + songs[i].previewUrl + '></td>');
+                // newTR.append('<td><img class="play-button" src="assets/images/play.png" data-preview=' + songs[i].previewUrl + '></td>');
+                newTR.append('<td><i class="fas fa-play play-button" data-preview=' + songs[i].previewUrl + '></i></td>');
                 newTR.append('<td>' + songs[i].trackName + '</td>');
                 newTR.append('<td><a href=' + songs[i].artistViewUrl + ' target="_blank">' + songs[i].artistName + '</a></td>');
                 newTR.append('<td><a href=' + songs[i].collectionViewUrl + ' target="_bank">' + songs[i].collectionName + '</a></td>');
@@ -582,7 +584,7 @@ $("#search-button").on("click", function (event) {
 
 
     //Hide the welcome message and show the search results screen
-    $("#welcome").hide();
+    $(".front-page").hide();
     $("#search-wrapper").show();
     resetSearch();
 
@@ -662,6 +664,7 @@ $(document).on("click", ".play-button", function () {
         // Set the src attribute to the preview URL, change the image to pause, and begin playing
         songPreview.setAttribute("src", previewURL);
         $(this).attr("src", "assets/images/pause.png");
+        // $(this).attr("src", "<i class='fas fa-pause'></i>")
         songPreview.play();
 
     } else {
