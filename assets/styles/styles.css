@@ -30,10 +30,17 @@ li {
 }
 
 body {
-  background: #efefef;
+  background: #f5f5f5;
   width: 100%;
   overflow-x: hidden;
   font-family: courier-std, monospace;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0 !important;
 }
 
 ::-webkit-scrollbar {
@@ -85,17 +92,23 @@ body {
 }
 
 .main-header nav a:hover {
-  background: #2988bc;
+  background: #1db954;
   border-radius: 25px;
 }
 
 .search-area {
-  margin: 50px auto 0px;
+  margin: 0px auto 0px;
   width: 80%;
+  padding-top: 47px;
+  width: 100%;
+  z-index: 20;
 }
 
 .search-area #searchForm {
   margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  position: fixed;
   text-align: center;
   position: relative;
   display: -webkit-box;
@@ -107,6 +120,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  background: rgba(8, 7, 6, 0.6);
 }
 
 .search-area #searchForm #search-by-group {
@@ -148,7 +162,6 @@ body {
   padding: 8px;
   width: 90%;
   font-weight: 400;
-  outline: none !important;
 }
 
 .search-area #searchForm #search-button {
@@ -168,7 +181,7 @@ body {
 .front-page {
   max-width: 100%;
   padding: 50px 30px;
-  background: #fafafa;
+  background: #f5f5f5;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[12];
@@ -244,59 +257,77 @@ body {
   padding: 30px 50px;
 }
 
+#search-wrapper .selected {
+  border: 2px solid red;
+}
+
 #search-wrapper .results-area h3 {
   padding: 20px 0px;
 }
 
 #search-wrapper #artist-results-wrapper #artist-results {
-  background-color: #080706;
-  border: 3px solid #2988bc;
-  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  padding: 10px;
   margin-bottom: 10px;
-  height: 230px;
-  overflow: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
   margin-bottom: 30px;
 }
 
 #search-wrapper #soundtrack-results {
-  background-color: #080706;
-  border: 3px solid #2988bc;
-  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  padding: 10px;
   margin-bottom: 10px;
-  height: 230px;
-  overflow: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
   margin-bottom: 30px;
 }
 
 #search-wrapper .movie-count,
 #search-wrapper .soundtrack-count,
 #search-wrapper .artist-count {
-  color: #2988bc;
+  color: #1db954;
 }
 
 #search-wrapper #youtube-logo {
-  width: 120px;
+  width: 100px;
   margin-left: 10px;
-  padding-bottom: 5px;
+  padding: 10px;
   cursor: pointer;
   display: none;
 }
 
-#search-wrapper .movie-soundtrack,
+#search-wrapper .movie-soundtrack {
+  width: 200px;
+  display: inline-block;
+  margin: 12px;
+  cursor: pointer;
+}
+
+#search-wrapper .movie-soundtrack img {
+  border-radius: 5px;
+}
+
 #search-wrapper .artist-album {
   width: 200px;
   display: inline-block;
-  margin: 5px;
+  margin: 12px;
   cursor: pointer;
 }
 
 #movie-results {
   background-color: #080706;
-  border: 3px solid #2988bc;
+  border: 3px solid #1db954;
   padding: 5px;
   margin-bottom: 30px;
   height: 330px;
@@ -335,12 +366,12 @@ body {
   height: 500px;
   overflow: auto;
   background-color: white;
-  border: 3px solid #2988bc;
+  border: 3px solid #1db954;
   margin-bottom: 10px;
 }
 
 #rec-tables .left-soundtracks #soundtrack-tracks #soundtrack-header {
-  background-color: #2988bc;
+  background-color: #1db954;
   color: white;
   text-align: center;
   font-weight: bold;
@@ -356,12 +387,12 @@ body {
   height: 500px;
   overflow: auto;
   background-color: white;
-  border: 3px solid #2988bc;
+  border: 3px solid #1db954;
   margin-bottom: 10px;
 }
 
 #rec-tables .right-suggested #suggested-tracks #suggested-header {
-  background-color: #2988bc;
+  background-color: #1db954;
   color: white;
   text-align: center;
   font-weight: bold;
@@ -369,7 +400,7 @@ body {
 
 #rec-tables tr td .play-button {
   cursor: pointer;
-  width: 20px;
+  width: 15px;
 }
 
 #rec-tables tr td .play-button:hover {
@@ -377,7 +408,7 @@ body {
 }
 
 #rec-tables tr td a {
-  color: #2988bc;
+  color: #1db954;
 }
 
 footer {
@@ -431,7 +462,7 @@ footer .rec-links .movies-links h6 {
 }
 
 footer .rec-links .movies-links ul li a {
-  color: #2988bc;
+  color: #1db954;
 }
 
 footer .rec-links .music-links {
@@ -447,7 +478,7 @@ footer .rec-links .music-links h6 {
 }
 
 footer .rec-links .music-links ul li a {
-  color: #2988bc;
+  color: #1db954;
 }
 
 footer .powered {

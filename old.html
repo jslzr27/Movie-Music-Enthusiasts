@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Movie Music Enthusiasts</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 container" id="header">
+                <img class="img-fluid" id="header-logo" src="assets/images/logo.png">
+                <img class="img-fluid" id="header-logo-title" src="assets/images/logo_title.png">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2" id="search-area">
+                <form id="searchForm">
+
+                    <div class="form-group">
+                        <label for="searchBy">Search By:</label><br>
+                        <select class="form-control" id="search-by">
+                            <option selected>Movie</option>
+                            <option>Music Artist</option>
+                            <option>Music Genre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="display:none;" id="genre-group">
+                        <label for="searchGenre">Genre:</label><br>
+                        <select class="form-control" id="search-genre">
+                            <option>Alternative</option>
+                            <option>Anime</option>
+                            <option>Blues</option>
+                            <option>Brazillian</option>
+                            <option>Children's Music</option>
+                            <option>Christian & Gospel</option>
+                            <option>Classical</option>
+                            <option>Comedy</option>
+                            <option>Country</option>
+                            <option>Dance</option>
+                            <option>Disney</option>
+                            <option>Easy Listening</option>
+                            <option>Electronic</option>
+                            <option>Hip-Hop/Rap</option>
+                            <option>Holiday</option>
+                            <option>Instrumental</option>
+                            <option>Jazz</option>
+                            <option>J-Pop</option>
+                            <option>K-Pop</option>
+                            <option>Latino</option>
+                            <option>New Age</option>
+                            <option>Opera</option>
+                            <option>Pop</option>
+                            <option>R&B</option>
+                            <option>Reggae</option>
+                            <option>Rock</option>
+                            <option>Soundtrack</option>
+                            <option>Vocal</option>
+                            <option>World</option>
+
+                        </select>
+                    </div>
+
+                    <label for="search-term">Search Term:</label><br>
+                    <input class="inputs rounded form-control" id="search-term" type="text"><br>
+
+                    <button type="submit" id="search-button" class="btn">Search</button>
+
+                </form>
+
+                <br>
+
+                <hr>
+                <h5 style="font-weight: bold;">Recommended Links</span>
+                </h5>
+                <span style="font-weight: bold;">Movies</span>
+                <ul id="movie-links"></ul>
+                <span style="font-weight: bold;">Music</span>
+                <ul id="music-links"></ul>
+                <hr>
+                <br>
+
+            </div>
+
+            <div class="col-md-10">
+                <div id="welcome" class="rounded">
+                    <h1>Welcome to Movie Music Enthusiasts!</h1> <br> This site is designed for movie and music lovers
+                    a-like, but more-so for those who love the music in movies. <br> Music has the ability to elevate a
+                    scene. In one moment it has your heart
+                    pounding as the beat amplifies the explosions of an action sequence, and in another it's sweet
+                    melody breaks you down into a sobbing mess. <br> No matter what your reason for visiting, we hope
+                    you leave having discovered more music
+                    and movies to enjoy. <br> To get started, choose the movie category to receive music suggestions
+                    based on the music in the movies you love, or a music category to receive suggestions on movies you
+                    may enjoy for their music content.
+                    <br><br>
+                    <h1>Happy Discovering!</h1>
+                </div>
+
+                <div id="search-wrapper">
+                    <div id="artist-results-wrapper">
+                        <h3>Artist Search Results<span class="artist-count"></span></h3>
+                        <div class="rounded" id="artist-results"></div>
+                    </div>
+                    <h3>Movie Search Results<span class="movie-count"></span></h3>
+                    <div class="rounded" id="movie-results"></div>
+                    <h3>Related Soundtrack(s)<span class="soundtrack-count"></span><img id="youtube-logo" src="assets/images/youtube_logo.png" alt="YouTube Logo"></h3>
+                    <div class="rounded" id="soundtrack-results"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-body rounded" id="soundtrack-tracks">
+                                
+                                <div class="card-header" id="soundtrack-header">Soundtrack</div>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Disc</th>
+                                            <th scope="col">Track</th>
+                                            <th scope="col">Song</th>
+                                            <th scope="col">Artist</th>
+                                            <th scope="col">Genre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="soundtrack-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body rounded" id="suggested-tracks">
+                                <div class="card-header" id="suggested-header">Suggested Music</div>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Song</th>
+                                            <th scope="col">Artist</th>
+                                            <th scope="col">Album</th>
+                                            <th scope="col">Genre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="suggested-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-box" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-message"></div>
+                <div class="modal-footer container-fluid">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-youtube" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                    <div class="modal-header"><h5 class="modal-title" id="youtube-modal-title">Modal title</h5></div>
+                <div class="modal-body">
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                    <div>
+                        <div id="youtube-player"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="fixed-bottom">
+        <div class="row">
+            <div class="col-4">
+                <a href="https://www.themoviedb.org/" target="_blank"><img src="assets/images/tmdb_logo.png" alt="TMDB Logo"></a>
+            </div>
+            <div class="col-4">Copyright &copy 2019</div>
+            <div class="col-4">
+                <a href="https://apple.com/itunes" target="_blank"><img src="assets/images/itunes_logo.png" alt="iTunes Logo"></a>
+            </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!-- Animate JS -->
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js> </script> <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-database.js"></script>
+    <script src="assets/javascript/logic.js"></script>
+</body>
+
+</html>

@@ -2,12 +2,17 @@
 
 //Colors
 $black: rgb(8, 7, 6);
-$blackTrans: rgba(8, 7, 6, 1);
-$paper: #efefef;
+$blackTrans: rgba(8, 7, 6, 0.6);
+$paper: #f5f5f5;
 $blue: #2988bc;
+$purple: #8A2BE2;
 $sea: #2f496e;
 $gold: #D4AF37;
 $grey: grey;
+// $green: #01d277;
+$green: #1db954;
+
+$highlightColor: $green;
 
 
 $bodyFont: courier-std, monospace;

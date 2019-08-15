@@ -245,7 +245,8 @@ function displaySoundtrackSongs() {
             $("#soundtrack-header").attr("data-id", $(this).attr("data-id"));
             var newTR = $('<tr>');
             // newTR.append('<td><img class="play-button" src="assets/images/play.png" data-preview=' + soundtrackSongs[i].previewUrl + '></td>');
-            newTR.append('<td><i class="fas fa-play play-button" data-preview=' + soundtrackSongs[i].previewUrl + '></i></td>');
+            newTR.append('<td><img class="play-button" src="assets/images/play-solid.svg" data-preview=' + soundtrackSongs[i].previewUrl + '></td>');
+            // newTR.append('<td><i class="fas fa-play play-button" data-preview=' + soundtrackSongs[i].previewUrl + '></i></td>');
             newTR.append('<td>' + soundtrackSongs[i].discNumber + '</td>');
             newTR.append('<td>' + soundtrackSongs[i].trackNumber + '</td>');
             newTR.append('<td>' + soundtrackSongs[i].trackName + '</td>');
@@ -302,7 +303,8 @@ function displaySongSuggestions(response, details) {
             if (songs[i].collectionExplicitness === details.explicit) {
                 var newTR = $('<tr>');
                 // newTR.append('<td><img class="play-button" src="assets/images/play.png" data-preview=' + songs[i].previewUrl + '></td>');
-                newTR.append('<td><i class="fas fa-play play-button" data-preview=' + songs[i].previewUrl + '></i></td>');
+                // newTR.append('<td><i class="fas fa-play play-button" data-preview=' + songs[i].previewUrl + '></i></td>');
+                newTR.append('<td><img class="play-button" src="assets/images/play-solid.svg" data-preview=' + songs[i].previewUrl + '></td>');
                 newTR.append('<td>' + songs[i].trackName + '</td>');
                 newTR.append('<td><a href=' + songs[i].artistViewUrl + ' target="_blank">' + songs[i].artistName + '</a></td>');
                 newTR.append('<td><a href=' + songs[i].collectionViewUrl + ' target="_bank">' + songs[i].collectionName + '</a></td>');
@@ -656,21 +658,26 @@ $(document).on("click", ".artist-album", function () {
 
 $(document).on("click", ".play-button", function () {
     var previewURL = $(this).attr("data-preview");
-    if ($(this).attr("src") === "assets/images/play.png") {
+    // if ($(this).attr("src") === "assets/images/play.png") {
+    if ($(this).attr("src") === "assets/images/play-solid.svg") {
+
         // Pause any current audio and set images back to play
         songPreview.pause();
-        $(".play-button").attr("src", "assets/images/play.png");
+        // $(".play-button").attr("src", "assets/images/play.png");
+        $(".play-button").attr("src", "assets/images/play-solid.svg");
 
         // Set the src attribute to the preview URL, change the image to pause, and begin playing
         songPreview.setAttribute("src", previewURL);
-        $(this).attr("src", "assets/images/pause.png");
+        // $(this).attr("src", "assets/images/pause.png");
         // $(this).attr("src", "<i class='fas fa-pause'></i>")
+        $(this).attr("src", "assets/images/pause-solid.svg");
         songPreview.play();
 
     } else {
         // Pause the music and set image to play
         songPreview.pause();
-        $(this).attr("src", "assets/images/play.png");
+        // $(this).attr("src", "assets/images/play.png");
+        $(this).attr("src", "assets/images/play-solid.svg");
     };
 });
 
@@ -681,8 +688,27 @@ $("#modal-youtube").on('hidden.bs.modal', function () {
 });
 
 songPreview.onended = function () {
-    $(".play-button").attr("src", "assets/images/play.png");
+    // $(".play-button").attr("src", "assets/images/play.png");
+    $(".play-button").attr("src", "assets/images/play-solid.svg");
 };
 
 //Initialize YouTube player
 loadYTPlayer();
+
+//Sticky searchbar 
+
+window.onscroll = function() {
+    scrollSearch();
+}
+
+var searchBar = document.getElementById("search-area");
+
+var sticky = searchBar.offsetTop;
+
+function scrollSearch() {
+    if (window.pageYOffset > sticky) {
+        searchBar.classList.add("sticky")
+    } else {
+        searchBar.classList.remove("sticky");   
+    }
+}
